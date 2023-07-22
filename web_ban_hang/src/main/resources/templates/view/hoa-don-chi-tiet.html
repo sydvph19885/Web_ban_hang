@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/dist/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/hoa-don-chi-tiet.css}">
+    <link th:href="@{/css/theme.css}" rel="stylesheet">
+    <script th:src="@{/js/theme.js}"></script>
+</head>
+<body>
+<header th:insert="~{layout/header}"></header>
+<br>
+<main style="margin-left: 450px">
+    <div class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 body-main">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img class="img" alt="Invoce Template"
+                                     src="http://pngimg.com/uploads/shopping_cart/shopping_cart_PNG59.png"/>
+                            </div>
+                            <div class="col-md-8 text-right">
+                                <h4 style="color: #F81D2D;"><strong
+                                        th:text="'Khách hàng:'+ ${hoaDon.tenNguoiNhan}"></strong>
+                                </h4>
+                                <p th:text="'Số điện thoại:'+ ${hoaDon.sdt}"></p>
+                                <p th:text="'Địa chỉ:'+ ${hoaDon.diaChi}"></p>
+
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <h2>Hóa đơn thanh toán</h2>
+                                <h5 th:text="${hoaDon.ma}"></h5>
+                            </div>
+                        </div>
+                        <br/>
+                        <div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th><h5>Sản phẩm</h5></th>
+                                    <th><h5>Số lượng</h5></th>
+                                    <th><h5>Tiền</h5></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="sp : ${hdct}">
+                                    <td class="col-md-6 " th:text="${sp.chiTietSP.tenSanPham}"></td>
+                                    <td class="col-md-3 " th:text="${sp.soLuong}"></td>
+                                    <td class="col-md-auto " style="margin-left: 20px"
+                                        th:text="${#numbers.formatCurrency(sp.donGia)}"></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">
+                                        <p>
+                                            <strong>Giảm giá: </strong>
+                                        </p>
+                                        <p>
+                                            <strong>Tổng tiền sản phẩm: </strong>
+                                        </p>
+                                        <p>
+                                            <strong>VAT: 10% </strong>
+                                        </p>
+                                        <p>
+                                            <strong>Shipping: </strong>
+                                        </p>
+                                        <p>
+                                            <strong>Tổng thanh toán: </strong>
+                                        </p>
+                                    </td>
+                                    <td class="col-md-12 subtotal-column" style="margin-left: 50px">
+                                        <p>
+                                            <strong>0 VND</strong>
+                                        </p>
+                                        <p>
+                                            <strong th:text="${#numbers.formatCurrency(tongTienSP)}"></strong>
+                                        </p>
+
+                                        <p>
+                                            <strong th:text="${#numbers.formatCurrency((tongTienSP*10)/100)}"> </strong>
+                                        </p>
+                                        <p>
+                                            <strong> 20,000 VND</strong>
+                                        </p>
+                                        <p>
+                                            <strong th:text="${#numbers.formatCurrency(tongTienSP + 20000 + ((tongTienSP*10)/100))}"></strong>
+                                        </p>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        </c:when>
+
+
+                        <div>
+                            <div class="col-md-12">
+                                <p><b>Date :</b> aaa</p>
+                                <br/>
+                                <p><b>Signature</b></p>
+                                <a type="button" th:if="${hoaDon.tinhTrang == 0}"
+                                   th:href="@{/thanh-toan/{id}(id=${hoaDon.id})}" class="btn btn-warning">Thanh
+                                    toán</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<br>
+<footer th:insert="~{layout/footer}"></footer>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+</html>
