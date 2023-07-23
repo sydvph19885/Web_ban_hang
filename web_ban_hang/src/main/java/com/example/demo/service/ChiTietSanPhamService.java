@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.ChiTietSP;
+import com.example.demo.entity.MauSac;
+import com.example.demo.entity.NhaSanXuat;
 import com.example.demo.repositoty.IChiTietSanPhamReponsitory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,7 +49,19 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
     }
 
     @Override
-    public Page<ChiTietSP> findChiTietSPByTenSanPhamContains(String ten,Pageable pageable) {
-        return sanPhamReponsitory.findChiTietSPByTenSanPhamContains(ten,pageable);
+    public Page<ChiTietSP> findChiTietSPByTenSanPhamContains(String ten, Pageable pageable) {
+        return sanPhamReponsitory.findChiTietSPByTenSanPhamContains(ten, pageable);
     }
+
+    @Override
+    public Page<ChiTietSP> searchDaThuocTinh(
+            Integer namBH,
+            MauSac mauSac,
+            NhaSanXuat nhaSanXuat,
+            Integer voucher,
+            Integer size,
+            Pageable pageable) {
+        return sanPhamReponsitory.searchDaThuocTinh(namBH,mauSac,nhaSanXuat,voucher,size,pageable);
+    }
+
 }

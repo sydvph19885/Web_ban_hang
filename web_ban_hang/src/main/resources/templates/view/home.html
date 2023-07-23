@@ -73,41 +73,70 @@
         </button>
         <br/>
         <br/>
-        <form class="thongTinLoc">
+        <form th:action="@{/user/search-multiple}" method="get" class="thongTinLoc">
             <div class="row">
                 <div class="col-2">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" name="nsx">
                         <option selected>Nhà sản xuất</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option
+                                th:each="nhaSX : ${nsx}"
+                                th:text="${nhaSX.ten}"
+                                th:value="${nhaSX.id}"
+                        ></option>
                     </select>
                 </div>
                 <div class="col-2">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" name="mauSac">
                         <option selected>Màu sắc</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option
+                                th:each="ms : ${mauSac}"
+                                th:text="${ms.ten}"
+                                th:value="${ms.id}"
+                        ></option>
                     </select>
                 </div>
                 <div class="col-2">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" name="size">
                         <option selected>Size</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option value="35">35</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                        <option value="41">41</option>
+                        <option value="41">42</option>
+                        <option value="43">43</option>
                     </select>
                 </div>
                 <div class="col-2">
                     <div class="input-group flex-nowrap">
-                        <input type="text" class="form-control" placeholder="Năm bảo hành"
-                               aria-describedby="addon-wrapping">
+                        <input
+                                type="text"
+                                class="form-control"
+                                name="namBH"
+                                placeholder="Năm bảo hành"
+                                aria-describedby="addon-wrapping"
+                        />
                     </div>
                 </div>
                 <div class="col-2">
-                    <button type="button" class="btn btn-info">Tìm kiếm</button>
+                    <div class="col-2">
+                        <div class="input-group flex-nowrap">
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    name="voucher"
+                                    placeholder="Voucher"
+                                    aria-describedby="addon-wrapping"
+                            />
+                        </div>
+                    </div>
                 </div>
+                <div class="col-2">
+                    <button type="submit" class="btn btn-info">Tìm kiếm</button>
+                </div>
+
             </div>
         </form>
     </section>
