@@ -24,7 +24,7 @@
     <br>
     <div style="text-align: center;font-weight: bold;font-size: 40px;color: #ffffff">XIN CHÀO</div>
     <br>
-    <form method="get" action="/search?trangSo=${trangHienTai+1}">
+    <form method="get" th:action="@{/user/search}">
         <div class="input-group flex-nowrap container">
             <input type="text" class="form-control" placeholder="Tìm kiếm" name="tenSearch" aria-label="Username"
                    aria-describedby="addon-wrapping">
@@ -73,18 +73,24 @@
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <div class="col-md-3 col-sm-6 col-12" th:each="sp,sanPham :${listSanPham}">
                 <div class="card card-pro mb-3" style="width: 269px;height: 450px">
-                    <img style="height: 300px" th:src="@{/image/{image}(image=${sp.image})}" class="card-img-top">
+                    <a th:href="@{/user/detail/{id}(id=${sp.id})}">
+                        <img style="height: 270px" th:src="@{/image/{image}(image=${sp.image})}" class="card-img-top">
+                    </a>
                     <div class="card-body">
-                        <a th:href="@{/user/detail/{id}(id=${sp.id})}">
-                            <h5 class="card-title" th:text="${sp.tenSanPham}"></h5>
-                        </a>
-
-                        <p class="card-text" th:text="${sp.giaBan}"></p>
+                        <h5 class="card-title" th:text="${sp.tenSanPham}"></h5>
+                        <p class="card-text" th:text="${#numbers.formatCurrency(sp.giaBan)}"></p>
                         <div class="row">
-                            <div class="col-6"><a th:href="@{/user/add-to-cart/{idSP}(idSP=${sp.id})}"
-                                                  class="btn btn-primary">Add to cart</a></div>
-                            <div class="col-6"><a th:href="@{/user/by-now/{idSP}(idSP=${sp.id})}"
-                                                  class="btn btn-primary">Buy now</a></div>
+                            <div class="col-1"></div>
+                            <div class="col-6">
+                                <a th:href="@{/user/add-to-cart/{idSP}(idSP=${sp.id})}"
+                                   class="btn btn-success">Add to cart</a>
+                            </div>
+                            <div class="col-4"><a th:href="@{/user/by-now/{idSP}(idSP=${sp.id})}"
+                                                  style="border: solid 1px red;"
+                                                  class="btn "><i style="color: red"
+                                                                  class="fas fa-shopping-cart"></i>
+                            </a>
+                            </div>
                         </div>
 
                     </div>

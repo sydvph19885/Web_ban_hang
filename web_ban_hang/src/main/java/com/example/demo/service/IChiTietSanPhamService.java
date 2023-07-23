@@ -16,4 +16,6 @@ public interface IChiTietSanPhamService {
     ChiTietSP getOne(String id);
 
     List<ChiTietSP> top10StockIn();
+
+    Page<ChiTietSP> findChiTietSPByTenSanPhamContains(String ten,Pageable pageable);
 }

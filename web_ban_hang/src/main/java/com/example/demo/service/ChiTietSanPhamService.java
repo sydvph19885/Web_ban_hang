@@ -45,4 +45,9 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
         top10StockInMana = sanPhamReponsitory.top10StockIn(pageable);
         return top10StockInMana;
     }
+
+    @Override
+    public Page<ChiTietSP> findChiTietSPByTenSanPhamContains(String ten,Pageable pageable) {
+        return sanPhamReponsitory.findChiTietSPByTenSanPhamContains(ten,pageable);
+    }
 }

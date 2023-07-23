@@ -104,8 +104,7 @@
                                 title="small"
                                 style="color: red"
                                 th:text="${detail.mauSac.ten}"
-                        ></span
-                        >
+                        ></span>
                     </h5>
                     <h5 class="sizes">
                         nhà sản xuất:
@@ -119,12 +118,14 @@
                         >
                     </h5>
                     <div class="action" style="margin-bottom: 35px">
-                        <button class="add-to-cart btn btn-default" type="button">
+                        <a class="add-to-cart btn th:h btn-default"
+                           th:href="@{/user/add-to-cart/{idSP}(idSP=${detail.id})}" type="button">
                             add to cart
-                        </button>
-                        <button class="like btn btn-default" type="button">
-                            <span class="fa fa-heart"></span>
-                        </button>
+                        </a>
+                        <a class="like btn btn-default" th:href="@{/user/by-now/{idSP}(idSP=${detail.id})}"
+                           type="button">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
                     </div>
                 </div>
             </div>

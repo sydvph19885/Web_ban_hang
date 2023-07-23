@@ -1,6 +1,7 @@
 package com.example.demo.repositoty;
 
 import com.example.demo.entity.ChiTietSP;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,5 +17,7 @@ public interface IChiTietSanPhamReponsitory extends JpaRepository<ChiTietSP, Str
             ORDER BY ct.ngayNhap ASC
             """)
     List<ChiTietSP> top10StockIn(Pageable pageable);
+
+    Page<ChiTietSP> findChiTietSPByTenSanPhamContains(String ten,Pageable pageable);
 
 }

@@ -30,7 +30,7 @@ public class CheckOutController {
 
     @Autowired
     private IHoaDonChiTietService hoaDonChiTietService;
-    
+
 
     @GetMapping("/check-out-user")
     public String checkOut() {

@@ -10,7 +10,7 @@ $(document).ready(function () {
             createChart();
         },
         error: function (error) {
-            danhSachSP = null;
+            danhSachSP = [];
             console.log(error);
         }
     })
