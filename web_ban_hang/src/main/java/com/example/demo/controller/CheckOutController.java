@@ -99,6 +99,7 @@ public class CheckOutController {
             model.addAttribute("hdct", hoaDonChiTietList);
             model.addAttribute("hoaDon", hoaDon);
             model.addAttribute("account", account);
+            model.addAttribute("time", new Date(new java.util.Date().getTime()));
         }
 
         return "view/hoa-don-chi-tiet";

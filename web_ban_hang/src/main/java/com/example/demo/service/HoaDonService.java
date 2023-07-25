@@ -29,4 +29,9 @@ public class HoaDonService implements IHoaDonService {
     public HoaDon getOne(String id) {
         return hoaDonRepository.findById(id).get();
     }
+
+    @Override
+    public List<HoaDon> findHoaDonByTinhTrang(Integer tinhTrang) {
+        return hoaDonRepository.findHoaDonByTinhTrang(tinhTrang);
+    }
 }

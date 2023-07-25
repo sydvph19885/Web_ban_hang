@@ -11,4 +11,6 @@ public interface IHoaDonService {
     void saveOrUpdate(HoaDon hoaDon);
 
     HoaDon getOne(String id);
+
+    List<HoaDon> findHoaDonByTinhTrang(Integer tinhTrang);
 }

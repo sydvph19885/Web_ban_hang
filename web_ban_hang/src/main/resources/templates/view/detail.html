@@ -92,7 +92,7 @@
               </div>
               <p class="product-description" th:text="${detail.moTa}"></p>
               <h4 class="price">
-                current price: <span th:text="${detail.giaBan}"> </span>
+                current price: <span th:text="${#numbers.formatCurrency(detail.giaBan)}"> </span>
               </h4>
               <p class="vote">
                 <strong>91%</strong> of buyers enjoyed this product!

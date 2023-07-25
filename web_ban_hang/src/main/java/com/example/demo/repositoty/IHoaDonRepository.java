@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface IHoaDonRepository extends JpaRepository<HoaDon, String> {
     List<HoaDon> findHoaDonsByAccount(Account account);
+
+    List<HoaDon> findHoaDonByTinhTrang(Integer tinhTrang);
 }

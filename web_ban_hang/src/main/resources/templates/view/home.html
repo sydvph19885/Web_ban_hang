@@ -55,6 +55,7 @@
                     name="tenSearch"
                     aria-label="Username"
                     aria-describedby="addon-wrapping"
+                    th:value="${param.tenSearch}"
             />
             <button
                     type="submit"
@@ -121,16 +122,14 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    <div class="col-2">
-                        <div class="input-group flex-nowrap">
-                            <input
-                                    type="text"
-                                    class="form-control"
-                                    name="voucher"
-                                    placeholder="Voucher"
-                                    aria-describedby="addon-wrapping"
-                            />
-                        </div>
+                    <div class="input-group flex-nowrap">
+                        <input
+                                type="text"
+                                class="form-control"
+                                name="voucher"
+                                placeholder="Voucher"
+                                aria-describedby="addon-wrapping"
+                        />
                     </div>
                 </div>
                 <div class="col-2">
@@ -204,7 +203,7 @@
     <br/>
 </main>
 <br/>
-<nav aria-label="Page navigation example" class="container">
+<nav th:if="${listSearchName == null && searDaThuocTinhs == null}" aria-label="Page navigation example" class="container">
     <ul class="pagination">
         <li class="page-item">
             <a
@@ -222,6 +221,52 @@
                     th:if="${trangHT+1 < tongTrang}"
                     class="page-link"
                     th:href="@{/user/home(page=${trangHT}+1)}"
+            >Next</a
+            >
+        </li>
+    </ul>
+</nav>
+<nav th:if="${listSearchName != null}" aria-label="Page navigation example" class="container">
+    <ul class="pagination">
+        <li class="page-item">
+            <a
+                    th:if="${trangHT > 0}"
+                    class="page-link"
+                    th:href="@{/user/search(page=${trangHT}-1)}"
+            >Previous</a
+            >
+        </li>
+        <li class="page-item">
+            <a class="page-link" th:text="${trangHT+1} + '/'+ ${tongTrang}"></a>
+        </li>
+        <li class="page-item">
+            <a
+                    th:if="${trangHT+1 < tongTrang}"
+                    class="page-link"
+                    th:href="@{/user/search(page=${trangHT}+1,tenSearch =${param.tenSearch})}"
+            >Next</a
+            >
+        </li>
+    </ul>
+</nav>
+<nav th:if="${searDaThuocTinhs != null}" aria-label="Page navigation example" class="container">
+    <ul class="pagination">
+        <li class="page-item">
+            <a
+                    th:if="${trangHT > 0}"
+                    class="page-link"
+                    th:href="@{/user/search-multiple(page=${trangHT}-1,namBH =${param.namBH},mauSac=${param.mauSac},nsx=${param.nsx},voucher=${param.voucher},size=${param.size})}"
+            >Previous</a
+            >
+        </li>
+        <li class="page-item">
+            <a class="page-link" th:text="${trangHT+1} + '/'+ ${tongTrang}"></a>
+        </li>
+        <li class="page-item">
+            <a
+                    th:if="${trangHT+1 < tongTrang}"
+                    class="page-link"
+                    th:href="@{/user/search-multiple(page=${trangHT}+1,namBH =${param.namBH},mauSac=${param.mauSac},nsx=${param.nsx},voucher=${param.voucher},size=${param.size})}"
             >Next</a
             >
         </li>
