@@ -65,16 +65,17 @@ public class HomController {
     }
 
     @GetMapping("/search")
-    public String search(Principal principal, Model model, @RequestParam(name = "tenSearch") String tenSearch, @RequestParam(value = "page", required = false) Optional<Integer> trangSo) {
+    public String search(Principal principal, Model model, @RequestParam(name = "tenSearch", required = false) String tenSearch, @RequestParam(value = "page", required = false) Optional<Integer> trangSo) {
         Pageable pageable = PageRequest.of(trangSo.orElse(0), 6);
         Page<ChiTietSP> chiTietSPPage = sanPhamService.findChiTietSPByTenSanPhamContains(tenSearch, pageable);
         model.addAttribute("listSanPham", chiTietSPPage.getContent());
+        model.addAttribute("listSearchName", chiTietSPPage.getContent());
+        model.addAttribute("tenSearch", tenSearch);
         model.addAttribute("trangHT", chiTietSPPage.getNumber());
         model.addAttribute("tongTrang", chiTietSPPage.getTotalPages());
         if (principal != null) {
             Account account = accountService.findAccountByUsername(principal.getName());
             model.addAttribute("account", account);
-            model.addAttribute("thongBao", "Cập nhật thành công!");
         }
         return "view/home";
     }
@@ -106,12 +107,14 @@ public class HomController {
             @RequestParam(value = "voucher", required = false) Integer voucher,
             @RequestParam(value = "size", required = false) Integer size,
             Model model,
-            Principal principal
+            Principal principal,
+            @RequestParam(value = "page", required = false) Optional<Integer> trangSo
     ) {
         java.util.List<Integer> listSize = new ArrayList<>();
-        Pageable pageable = PageRequest.of(0, 6);
+        Pageable pageable = PageRequest.of(trangSo.orElse(0), 6);
         Page<ChiTietSP> listSearch = sanPhamService.searchDaThuocTinh(namBH, mauSac, nhaSanXuat, voucher, size, pageable);
         model.addAttribute("listSanPham", listSearch.getContent());
+        model.addAttribute("searDaThuocTinhs", listSearch.getContent());
         model.addAttribute("trangHT", listSearch.getNumber());
         model.addAttribute("tongTrang", listSearch.getTotalPages());
         model.addAttribute("mauSac", mauSacService.getAll());
